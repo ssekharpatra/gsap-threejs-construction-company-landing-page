@@ -1,9 +1,13 @@
-import "./index.css";
-import Specifications from "./components/Specifications";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
 import Lenis from "lenis";
+
+import "./index.css";
+
+import Hero from "./components/Hero";
+import LatestProject from "./components/LatestProject";
+import Contact from "./components/Contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +15,7 @@ const App = () => {
    useEffect(() => {
       // Initialize Lenis with optimized settings for construction company website
       const lenis = new Lenis({
-         duration: 1.2,
+         duration: 2,
          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing for smooth feel
          direction: "vertical",
          gestureDirection: "vertical",
@@ -44,7 +48,9 @@ const App = () => {
 
    return (
       <main>
-         <Specifications />
+         <Hero />
+         <LatestProject />
+         <Contact />
       </main>
    );
 };

@@ -7,7 +7,7 @@ import { Canvas } from "@react-three/fiber";
 import clsx from "clsx";
 import StudioLights from "./three/StudioLights";
 import HighRiseBuilding from "./models/HighRiseBuilding";
-import { specifications } from "../constants";
+import { latestProjectSpecifications } from "../constants";
 
 const ModelScroll = () => {
    const groupRef = useRef(null);
@@ -16,10 +16,10 @@ const ModelScroll = () => {
       // 3D MODEL MOVING / ROTATION ANIMATION
       const modelTimeline = gsap.timeline({
          scrollTrigger: {
-            trigger: "#specifications",
+            trigger: "#latest-project",
             start: "top top",
             end: "bottom  top",
-            scrub: 1,
+            scrub: 2,
             pin: true,
          },
       });
@@ -29,6 +29,7 @@ const ModelScroll = () => {
          modelTimeline
             .to(groupRef.current.position, {
                x: 2,
+               y: 0.1,
                ease: "power1.inOut",
             })
             .to(
@@ -113,18 +114,24 @@ const ModelScroll = () => {
                </Html>
             }
          >
-            <HighRiseBuilding scale={0.02} position={[0, -1, 0]} />
-            {/* <OrbitControls /> */}
+            <HighRiseBuilding scale={0.02} position={[0, -1.7, 0]} />
          </Suspense>
       </group>
    );
 };
 
-const Specifications = () => {
+const LatestProject = () => {
    return (
-      <section id="specifications" className="relative text-white">
+      <section id="latest-project" className="relative text-white">
+         <div className="absolute top-10 left-1/2 -translate-x-1/2 text-center">
+            <span className="text-sm text-[#cfcfcf] uppercase font-bold tracking-widest">
+               Our Latest Project
+            </span>
+            <h2 className="text-5xl font-bold mt-2">Twinspire Nexus</h2>
+         </div>
+
          <Canvas
-            id="specifications-canvas"
+            id="latest-project-canvas"
             className="!w-full !h-dvh relative z-40"
             camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}
          >
@@ -134,20 +141,20 @@ const Specifications = () => {
          </Canvas>
 
          <div className="absolute inset-0">
-            {specifications.map((feature, index) => (
+            {latestProjectSpecifications.map((feature, index) => (
                <div
                   key={feature.id}
                   className={clsx(
-                     "max-w-md absolute",
+                     "max-w-md absolute top-1/2 -translate-y-1/2 opacity-0",
                      `box${index + 1}`,
                      feature.styles
                   )}
                >
                   {/* <img src={feature.icon} alt={feature.highlight} /> */}
-                  <h6 className="text-white text-2xl font-bold">
+                  <h6 className="text-white text-3xl font-bold">
                      {feature.highlight}
                   </h6>
-                  <p className="mt-2 text-white">{feature.text}</p>
+                  <p className="mt-3 text-white text-lg">{feature.text}</p>
                </div>
             ))}
          </div>
@@ -155,4 +162,4 @@ const Specifications = () => {
    );
 };
 
-export default Specifications;
+export default LatestProject;

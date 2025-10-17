@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  @apply bg-black;
+  @apply bg-[#191919];
   overflow-x: hidden;
   /* Prevent horizontal scroll */
   margin: 0;
