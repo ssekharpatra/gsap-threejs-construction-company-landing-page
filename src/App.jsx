@@ -15,7 +15,7 @@ const App = () => {
    useEffect(() => {
       // Initialize Lenis with optimized settings for construction company website
       const lenis = new Lenis({
-         duration: 2,
+         duration: 1.2,
          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing for smooth feel
          direction: "vertical",
          gestureDirection: "vertical",
