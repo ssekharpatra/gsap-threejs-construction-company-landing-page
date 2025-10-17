@@ -19,7 +19,7 @@ const ModelScroll = () => {
             trigger: "#latest-project",
             start: "top top",
             end: "bottom  top",
-            scrub: 1,
+            scrub: 2,
             pin: true,
          },
       });
