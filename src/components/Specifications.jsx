@@ -1,7 +1,8 @@
 import { useRef, Suspense } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Html, OrbitControls } from "@react-three/drei";
+import { Html } from "@react-three/drei";
+import { MathUtils } from "three";
 import { Canvas } from "@react-three/fiber";
 import clsx from "clsx";
 import StudioLights from "./three/StudioLights";
@@ -30,35 +31,76 @@ const ModelScroll = () => {
                x: 2,
                ease: "power1.inOut",
             })
-            .to(".box1", { opacity: 1 })
+            .to(
+               groupRef.current.rotation,
+               {
+                  y: MathUtils.degToRad(35),
+                  ease: "power1.inOut",
+               },
+               "<"
+            )
+            .to(".box1", { opacity: 1 }, "-=0.3")
 
             .to(groupRef.current.position, {
                x: -2,
                ease: "power1.inOut",
             })
-            .to(".box1", { opacity: 0 })
-            .to(".box2", { opacity: 1 })
+            .to(
+               groupRef.current.rotation,
+               {
+                  y: MathUtils.degToRad(-35),
+                  ease: "power1.inOut",
+               },
+               "<"
+            )
+            .to(".box1", { opacity: 0 }, "-=0.5")
+            .to(".box2", { opacity: 1 }, "-=0.3")
 
             .to(groupRef.current.position, {
                x: 2,
                ease: "power1.inOut",
             })
-            .to(".box2", { opacity: 0 })
-            .to(".box3", { opacity: 1 })
+            .to(
+               groupRef.current.rotation,
+               {
+                  x: MathUtils.degToRad(35),
+                  ease: "power1.inOut",
+               },
+               "<"
+            )
+            .to(".box2", { opacity: 0 }, "-=0.5")
+            .to(".box3", { opacity: 1 }, "-=0.3")
 
             .to(groupRef.current.position, {
                x: -2,
                ease: "power1.inOut",
             })
-            .to(".box3", { opacity: 0 })
-            .to(".box4", { opacity: 1 })
+            .to(
+               groupRef.current.rotation,
+               {
+                  x: MathUtils.degToRad(0),
+                  y: MathUtils.degToRad(0),
+                  ease: "power1.inOut",
+               },
+               "<"
+            )
+            .to(".box3", { opacity: 0 }, "-=0.5")
+            .to(".box4", { opacity: 1 }, "-=0.3")
 
             .to(groupRef.current.position, {
                x: 2,
                ease: "power1.inOut",
             })
-            .to(".box4", { opacity: 0 })
-            .to(".box5", { opacity: 1 });
+            .to(
+               groupRef.current.rotation,
+               {
+                  y: MathUtils.degToRad(360),
+                  ease: "power1.inOut",
+               },
+               "<"
+            )
+            .to(".box4", { opacity: 0 }, "-=0.5")
+            .to(".box5", { opacity: 1 }, "-=0.3");
       }
    }, []);
 
@@ -80,11 +122,7 @@ const ModelScroll = () => {
 
 const Specifications = () => {
    return (
-      <section
-         id="specifications"
-         //  style={{ width: "100vw", height: "100vh" }}
-         className="relative"
-      >
+      <section id="specifications" className="relative text-white">
          <Canvas
             id="specifications-canvas"
             className="!w-full !h-dvh relative z-40"
@@ -100,16 +138,16 @@ const Specifications = () => {
                <div
                   key={feature.id}
                   className={clsx(
-                     "box max-w-xs absolute",
+                     "max-w-md absolute",
                      `box${index + 1}`,
                      feature.styles
                   )}
                >
                   {/* <img src={feature.icon} alt={feature.highlight} /> */}
-                  <p className="text-white text-sm">
-                     <span>{feature.highlight}</span> <br />
-                     {feature.text}
-                  </p>
+                  <h6 className="text-white text-2xl font-bold">
+                     {feature.highlight}
+                  </h6>
+                  <p className="mt-2 text-white">{feature.text}</p>
                </div>
             ))}
          </div>

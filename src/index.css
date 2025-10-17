@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+/* Optimize for smooth scrolling */
+html {
+  scroll-behavior: auto;
+  /* Disable native smooth scroll to let Lenis handle it */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+}
+
 body {
   @apply bg-black;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  margin: 0;
+  padding: 0;
+}
+
+/* Optimize 3D canvas for smooth scrolling */
+#specifications-canvas {
+  will-change: transform;
+  transform: translateZ(0);
+  /* Force hardware acceleration */
+}
+
+/* Ensure smooth scrolling works with pinned content */
+#specifications {
+  will-change: transform;
+  transform: translateZ(0);
+  /* Force hardware acceleration */
+}
+
+/* Optimize scroll performance for all elements */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
